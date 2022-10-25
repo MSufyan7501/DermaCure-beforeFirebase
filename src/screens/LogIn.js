@@ -1,58 +1,61 @@
-/* eslint-disable prettier/prettier */
 import {
-  StyleSheet,
   Image,
   Text,
   TouchableOpacity,
-  ScrollView,
+  // ScrollView,
   ImageBackground,
-  KeyboardAvoidingView,
+  // KeyboardAvoidingView,
   View,
-  TextInput,
+  // TextInput,
 } from 'react-native';
 import React from 'react';
 
-import {
-  responsiveHeight,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
+// import {
+//   responsiveHeight,
+//   responsiveWidth,
+// } from 'react-native-responsive-dimensions';
 import InputContainer from '../components/InputContainer';
 import Button from '../components/Buttton';
+import {styles} from '../assets/helpers';
+import {responsiveHeight} from 'react-native-responsive-dimensions';
+
 // import InputConponent from '../../components/InputConponent';
 // import FormButton from '../../components/FormButton';
 
 const LogIn = ({navigation}) => {
-  const assets = '../assets/icons/';
+  const icon = '../assets/icons/';
   const DATA = [
-    {img: require(assets + 'email-vector.png'), PLACEHOLDER: 'Email'},
+    {img: require(icon + 'email-vector.png'), PLACEHOLDER: 'Email'},
     {
-      img: require(assets + 'vector-password.png'),
+      img: require(icon + 'vector-password.png'),
       PLACEHOLDER: 'Password',
     },
   ];
   return (
     <ImageBackground
-      source={require(assets + 'background-image.png')}
+      source={require(icon + 'background-image.png')}
       blurRadius={10}
+      resizeMode={'stretch'}
       style={styles.MainView}>
       {/* <KeyboardAvoidingView> */}
       {/* <ScrollView> */}
-      <View style={{paddingVertical: '13%'}}></View>
+      <View style={{paddingVertical: '13%'}} />
 
+      {/* grey blurr box */}
       <View
         style={{
-          width: '78%',
+          width: '87%',
           backgroundColor: 'rgba(255,255,255,0.8)',
           borderRadius: 26,
           paddingVertical: '3%',
           alignItems: 'center',
-          marginTop: '0%',
         }}>
         <Text
           style={{
             fontSize: 24,
             paddingVertical: '3%',
-            fontWeight: '700',
+            fontWeight: '800',
+            fontStyle: 'italic',
             color: '#376FCC',
           }}>
           Login
@@ -68,8 +71,8 @@ const LogIn = ({navigation}) => {
           );
         })}
         <TouchableOpacity
-          //   onPress={() => navigation.navigate('ForgotPassword')}
-          onPress={() => console.log('forget password')}
+          onPress={() => navigation.navigate('ForgetPass')}
+          // onPress={() => console.log('forget password')}
           style={{
             marginHorizontal: '10%',
             padding: '1%',
@@ -97,21 +100,11 @@ const LogIn = ({navigation}) => {
         OR
       </Text>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          height: '5%',
-          backgroundColor: 'white',
-          width: '75%',
-          alignSelf: 'center',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderRadius: 50,
-        }}>
+      <View style={styles.FbGoogleBox}>
         <Image
           style={{height: '60%', width: '40%'}}
           resizeMode="contain"
-          source={require(assets + 'fb-vector.png')}
+          source={require(icon + 'fb-vector.png')}
         />
         <View
           style={{
@@ -124,7 +117,7 @@ const LogIn = ({navigation}) => {
         <Image
           style={{height: '60%', width: '40%'}}
           resizeMode="contain"
-          source={require(assets + 'google-vector.png')}
+          source={require(icon + 'google-vector.png')}
         />
       </View>
       <View
@@ -136,9 +129,7 @@ const LogIn = ({navigation}) => {
         <Text style={{color: '#376FCC', fontWeight: '400', fontSize: 14}}>
           Don't have an account?{' '}
         </Text>
-        <TouchableOpacity
-          //   onPress={() => navigation.navigate('Register')}
-          onPress={() => console.log('Register')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
           <Text
             style={{
               color: '#ffff',
@@ -155,13 +146,5 @@ const LogIn = ({navigation}) => {
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  MainView: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-  },
-});
 
 export default LogIn;
