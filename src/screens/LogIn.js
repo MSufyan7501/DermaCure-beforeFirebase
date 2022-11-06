@@ -9,18 +9,23 @@ import {
   // TextInput,
 } from 'react-native';
 import React from 'react';
-
-// import {
-//   responsiveHeight,
-//   responsiveWidth,
-// } from 'react-native-responsive-dimensions';
+import {styles} from '../assets/helpers';
+import * as yup from 'yup';
 import InputContainer from '../components/InputContainer';
 import Button from '../components/Buttton';
-import {styles} from '../assets/helpers';
-import {responsiveHeight} from 'react-native-responsive-dimensions';
 
-// import InputConponent from '../../components/InputConponent';
-// import FormButton from '../../components/FormButton';
+const LogInSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please Enter a Valid Email Address')
+    .required('valid Email is required'),
+  password: yup
+    .string()
+    .min(8, ({min}) => {
+      `Password should contain atleast ${min} characters`;
+    })
+    .required('password is required'),
+});
 
 const LogIn = ({navigation}) => {
   const icon = '../assets/icons/';
@@ -37,39 +42,12 @@ const LogIn = ({navigation}) => {
       blurRadius={10}
       resizeMode={'stretch'}
       style={styles.MainView}>
-      {/* <KeyboardAvoidingView> */}
-      {/* <ScrollView> */}
       <View style={{paddingVertical: '13%'}} />
 
-      {/* grey blurr box */}
-      <View
-        style={{
-          width: '87%',
-          backgroundColor: 'rgba(255,255,255,0.8)',
-          borderRadius: 26,
-          paddingVertical: '3%',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontSize: 24,
-            paddingVertical: '3%',
-            fontWeight: '800',
-            fontStyle: 'italic',
-            color: '#376FCC',
-          }}>
-          Login
-        </Text>
-
-        {DATA.map((DATA, index) => {
-          return (
-            <InputContainer
-              key={index}
-              PLACEHOLDER={DATA.PLACEHOLDER}
-              IMG={DATA.img}
-            />
-          );
-        })}
+      <View style={styles.MainBox}>
+        <Text style={styles.MainText}>Login</Text>
+        <InputContainer IMG={DATA[0].img} PLACEHOLDER={DATA[0].PLACEHOLDER} />
+        <InputContainer IMG={DATA[1].img} PLACEHOLDER={DATA[1].PLACEHOLDER} />
         <TouchableOpacity
           onPress={() => navigation.navigate('ForgetPass')}
           // onPress={() => console.log('forget password')}
@@ -86,9 +64,8 @@ const LogIn = ({navigation}) => {
             Forget Password?
           </Text>
         </TouchableOpacity>
-        <Button ToScreen={'Disease'} navigation={navigation} TEXT={'Login'} />
+        <Button TEXT={'LogIn'} ToScreen={'Disease'} navigation={navigation} />
       </View>
-
       <Text
         style={{
           marginVertical: '1%',

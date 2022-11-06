@@ -26,23 +26,13 @@ const Register = ({navigation}) => {
       style={[styles.MainView, {paddingTop: 100}]}>
       <View style={styles.MainBox}>
         <Text style={styles.MainText}>Register</Text>
-
-        {DATA.map((DATA, index) => {
-          return (
-            <InputContainer
-              key={index}
-              PLACEHOLDER={DATA.PLACEHOLDER}
-              IMG={DATA.img}
-            />
-          );
-        })}
-
-        <Button
-          ToScreen={'Login'}
-          navigation={navigation}
-          TEXT={'Reset Password'}
-        />
+        <InputContainer IMG={DATA[0].img} PLACEHOLDER={DATA[0].PLACEHOLDER} />
+        <InputContainer IMG={DATA[1].img} PLACEHOLDER={DATA[1].PLACEHOLDER} />
+        <InputContainer IMG={DATA[2].img} PLACEHOLDER={DATA[2].PLACEHOLDER} />
+        <InputContainer IMG={DATA[3].img} PLACEHOLDER={DATA[3].PLACEHOLDER} />
+        <Button TEXT={'Register'} ToScreen={'Login'} navigation={navigation} />
       </View>
+
       <Text
         style={{
           marginVertical: '1%',

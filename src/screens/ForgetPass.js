@@ -17,18 +17,8 @@ const ForgetPass = ({navigation}) => {
       style={styles.MainView}>
       <View style={styles.MainBox}>
         <Text style={styles.MainText}>Forget Password</Text>
-
-        {DATA.map((DATA, index) => {
-          return (
-            <InputContainer
-              key={index}
-              PLACEHOLDER={DATA.PLACEHOLDER}
-              IMG={DATA.img}
-            />
-          );
-        })}
-
-        <Button ToScreen={'OTP'} navigation={navigation} TEXT={'Send OTP'} />
+        <InputContainer IMG={DATA[0].img} PLACEHOLDER={DATA[0].PLACEHOLDER} />
+        <Button TEXT={'Send OTP'} ToScreen={'OTP'} navigation={navigation} />
         <Text style={styles.Note}>
           Note:
           <Text style={{fontWeight: '400'}}>

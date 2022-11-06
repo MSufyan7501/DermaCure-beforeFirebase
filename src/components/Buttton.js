@@ -28,13 +28,8 @@ const Button = ({
           borderRadius: 50,
           marginVertical: responsiveHeight(2),
         },
-        ButtonStyle,
       ]}>
-      <Text
-        style={[
-          {fontSize: 16, color: '#FFFFFF', fontWeight: '700'},
-          TextStyle,
-        ]}>
+      <Text style={{fontSize: 16, color: '#FFFFFF', fontWeight: '700'}}>
         {TEXT}
       </Text>
     </TouchableOpacity>

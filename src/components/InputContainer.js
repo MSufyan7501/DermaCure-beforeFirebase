@@ -14,9 +14,23 @@ const InputContainer = ({IMG, PLACEHOLDER}) => {
         source={IMG}
       />
       <TextInput
+        style={styles.InputContainerStyle}
         placeholder={PLACEHOLDER}
         placeholderTextColor={'grey'}
-        style={styles.InputContainerStyle}
+        secureTextEntry={
+          PLACEHOLDER === 'Password' || PLACEHOLDER === 'Confirm Password'
+            ? true
+            : false
+        }
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType={
+          PLACEHOLDER === 'Phone Number'
+            ? 'phone-pad'
+            : PLACEHOLDER === 'Email'
+            ? 'email-address'
+            : 'default'
+        }
       />
     </View>
   );

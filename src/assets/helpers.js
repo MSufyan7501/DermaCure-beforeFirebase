@@ -7,7 +7,25 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
+  InputContainerStyle: {
+    width: '90%',
+    backgroundColor: 'transparent',
+    opacity: 1,
+    marginLeft: '7%',
+    color: 'black',
+  },
 
+  Container: {
+    flexDirection: 'row',
+    width: '90%',
+    marginVertical: 9,
+    height: responsiveHeight(6),
+    backgroundColor: '#fff',
+    justifyContent: 'space-around',
+    paddingHorizontal: '8%',
+    alignItems: 'center',
+    borderRadius: responsiveHeight(6) / 2,
+  },
   MainBox: {
     width: '87%',
     backgroundColor: 'rgba(255,255,255,0.8)',

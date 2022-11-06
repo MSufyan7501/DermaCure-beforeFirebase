@@ -4,12 +4,6 @@ import {styles} from '../assets/helpers';
 import Button from '../components/Buttton';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
 
-// const DATA = [
-//   {
-//     img: require('../assets/icons/email-vector.png'),
-//     PLACEHOLDER: 'Email/Phone number',
-//   },
-// ];
 const icon = '../assets/icons/';
 
 const DATA = [{value: ''}, {value: ''}, {value: ''}, {value: ''}];
@@ -34,6 +28,7 @@ const OTP = ({navigation}) => {
           {DATA.map((DATA, index) => {
             return (
               <View
+                key={index}
                 style={{
                   height: '90%',
                   width: '20%',
