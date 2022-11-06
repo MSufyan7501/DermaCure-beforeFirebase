@@ -6,18 +6,11 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-const Button = ({
-  TEXT,
-  navigation,
-  ToScreen,
-  ButtonStyle,
-  DISABLE,
-  TextStyle,
-}) => {
+const Button = ({TEXT, navigation, ToScreen, onPress, DISABLE}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(ToScreen)}
-      // disabled={DISABLE}
+      onPress={onPress}
+      disabled={DISABLE}
       style={[
         {
           height: responsiveHeight(5.5),

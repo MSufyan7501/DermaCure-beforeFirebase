@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "444295480261",
+    "project_id": "rn-dermacure",
+    "storage_bucket": "rn-dermacure.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444295480261:android:5cf23dcfe5a6ea44e641ac",
+        "android_client_info": {
+          "package_name": "com.dermacure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444295480261-kenepqnd2g5libcqbpdu8gdt5un9buue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-hpq6jKO8v6zKckWJYiotwNbeFtKHjDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444295480261-kenepqnd2g5libcqbpdu8gdt5un9buue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

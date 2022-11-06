@@ -1,37 +1,58 @@
-import {View, StyleSheet, TextInput, Image} from 'react-native';
+import {View, StyleSheet, TextInput, Image, Text} from 'react-native';
 import React from 'react';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
 
-const InputContainer = ({IMG, PLACEHOLDER}) => {
+const InputContainer = ({
+  IMG,
+  PLACEHOLDER,
+  handleChange,
+  errors,
+  handleBlur,
+}) => {
   return (
-    <View style={styles.Container}>
-      <Image
-        style={{
-          height: '35%',
-          width: '8%',
-        }}
-        resizeMode="contain"
-        source={IMG}
-      />
-      <TextInput
-        style={styles.InputContainerStyle}
-        placeholder={PLACEHOLDER}
-        placeholderTextColor={'grey'}
-        secureTextEntry={
-          PLACEHOLDER === 'Password' || PLACEHOLDER === 'Confirm Password'
-            ? true
-            : false
-        }
-        autoCapitalize="none"
-        autoCorrect={false}
-        keyboardType={
-          PLACEHOLDER === 'Phone Number'
-            ? 'phone-pad'
-            : PLACEHOLDER === 'Email'
-            ? 'email-address'
-            : 'default'
-        }
-      />
+    <View>
+      <View style={styles.Container}>
+        <Image
+          style={{
+            height: '35%',
+            width: '8%',
+          }}
+          resizeMode="contain"
+          source={IMG}
+        />
+        <TextInput
+          style={styles.InputContainerStyle}
+          placeholder={PLACEHOLDER}
+          placeholderTextColor={'grey'}
+          secureTextEntry={
+            PLACEHOLDER === 'Password' || PLACEHOLDER === 'Confirm Password'
+              ? true
+              : false
+          }
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType={
+            PLACEHOLDER === 'Phone Number'
+              ? 'phone-pad'
+              : PLACEHOLDER === 'Email'
+              ? 'email-address'
+              : 'default'
+          }
+          onChangeText={handleChange}
+          onBlur={handleBlur}
+        />
+      </View>
+      {errors ? (
+        <Text
+          style={{
+            color: 'red',
+            fontSize: 12,
+            alignSelf: 'flex-start',
+            paddingHorizontal: '5%',
+          }}>
+          {errors}
+        </Text>
+      ) : null}
     </View>
   );
 };

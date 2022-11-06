@@ -6,11 +6,15 @@ import {
   ImageBackground,
   // KeyboardAvoidingView,
   View,
+  Alert,
+  ToastAndroid,
   // TextInput,
 } from 'react-native';
 import React from 'react';
 import {styles} from '../assets/helpers';
 import * as yup from 'yup';
+import firebase from '@react-native-firebase/app';
+import {Formik} from 'formik';
 import InputContainer from '../components/InputContainer';
 import Button from '../components/Buttton';
 
@@ -21,11 +25,46 @@ const LogInSchema = yup.object().shape({
     .required('valid Email is required'),
   password: yup
     .string()
-    .min(8, ({min}) => {
-      `Password should contain atleast ${min} characters`;
-    })
+    .min(8, 'Password should contain atleast 8 characters')
     .required('password is required'),
 });
+
+const OnLogInPress = async (Email, Pass, navigation) => {
+  try {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(Email, Pass)
+      .then(() => {
+        navigation.navigate('Disease');
+        ToastAndroid.showWithGravity(
+          'Logged In Successfully ',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
+        //move to home
+      });
+  } catch (error) {
+    Alert.alert(
+      'Error!!',
+      error.message + '\n\n What do you want to do next?',
+      [
+        {
+          text: 'OK',
+          style: 'cancel',
+          onPress: () => {
+            console.log('ok');
+          },
+        },
+        {
+          text: 'Register',
+          onPress: () => {
+            navigation.push('Register');
+          },
+        },
+      ],
+    );
+  }
+};
 
 const LogIn = ({navigation}) => {
   const icon = '../assets/icons/';
@@ -46,26 +85,66 @@ const LogIn = ({navigation}) => {
 
       <View style={styles.MainBox}>
         <Text style={styles.MainText}>Login</Text>
-        <InputContainer IMG={DATA[0].img} PLACEHOLDER={DATA[0].PLACEHOLDER} />
-        <InputContainer IMG={DATA[1].img} PLACEHOLDER={DATA[1].PLACEHOLDER} />
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ForgetPass')}
-          // onPress={() => console.log('forget password')}
-          style={{
-            marginHorizontal: '10%',
-            padding: '1%',
-            alignSelf: 'flex-end',
-          }}>
-          <Text
-            style={{
-              fontSize: 12,
-              color: 'black',
-            }}>
-            Forget Password?
-          </Text>
-        </TouchableOpacity>
-        <Button TEXT={'LogIn'} ToScreen={'Disease'} navigation={navigation} />
+        <Formik
+          initialValues={{email: '', password: ''}}
+          onSubmit={values => {
+            // console.log('Email', values.email);
+            // console.log('Password', values.password);
+
+            OnLogInPress(values.email, values.password, navigation);
+          }}
+          validationSchema={LogInSchema}
+          validateOnMount={true}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            errors,
+            values,
+            isValid,
+          }) => (
+            <>
+              <InputContainer
+                IMG={DATA[0].img}
+                errors={errors.email}
+                handleChange={handleChange('email')}
+                handleBlur={handleBlur('email')}
+                PLACEHOLDER={DATA[0].PLACEHOLDER}
+              />
+              <InputContainer
+                IMG={DATA[1].img}
+                PLACEHOLDER={DATA[1].PLACEHOLDER}
+                handleChange={handleChange('password')}
+                errors={errors.password}
+                handleBlur={handleBlur('password')}
+              />
+
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ForgetPass')}
+                // onPress={() => console.log('forget password')}
+                style={{
+                  marginHorizontal: '10%',
+                  padding: '1%',
+                  alignSelf: 'flex-end',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: 'black',
+                  }}>
+                  Forget Password?
+                </Text>
+              </TouchableOpacity>
+              <Button
+                TEXT={'LogIn'}
+                DISABLE={!isValid}
+                onPress={handleSubmit}
+              />
+            </>
+          )}
+        </Formik>
       </View>
+
       <Text
         style={{
           marginVertical: '1%',
